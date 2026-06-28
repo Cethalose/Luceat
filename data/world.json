@@ -1,0 +1,18 @@
+{
+  "campaignName": "Luceat",
+  "currentScene": {
+    "location": "Ancient Stone Temple",
+    "summary": "The player has entered an ancient stone temple lit by a flickering torch.",
+    "activeThreats": [],
+    "visibleChoices": [
+      "Explore the central chamber",
+      "Open the heavy stone door",
+      "Inspect the weathered statues"
+    ]
+  },
+  "worldNotes": [],
+  "locations": [],
+  "npcs": [],
+  "quests": [],
+  "storyArcs": []
+}

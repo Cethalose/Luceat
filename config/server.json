@@ -1,0 +1,8 @@
+{
+    "discord": {
+        "gameChannelId": "734659304883486740"
+    },
+    "ai": {
+        "model": "gemma4:12b"
+    }
+}
