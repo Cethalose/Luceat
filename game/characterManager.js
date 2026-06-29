@@ -18,7 +18,12 @@ function loadCharacterForUser(user) {
         return null;
     }
 
-    return JSON.parse(fs.readFileSync(playerPath, "utf8"));
+    const player = JSON.parse(fs.readFileSync(playerPath, "utf8"));
+
+    return {
+        player,
+        playerPath
+    };
 }
 
 module.exports = {
