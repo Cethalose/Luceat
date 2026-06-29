@@ -7,12 +7,12 @@ function getSafeUsername(username) {
     return username.replace(/[^a-z0-9_-]/gi, "_");
 }
 
-function getPlayerPath(username) {
-    return path.join(playersDir, `${getSafeUsername(username)}.json`);
+function getPlayerPath(userId) {
+    return path.join(playersDir, `${userId}.json`);
 }
 
 function loadCharacterForUser(user) {
-    const playerPath = getPlayerPath(user.username);
+    const playerPath = getPlayerPath(user.id);
 
     if (!fs.existsSync(playerPath)) {
         return null;

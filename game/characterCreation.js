@@ -8,8 +8,8 @@ function getSafeUsername(username) {
     return username.replace(/[^a-z0-9_-]/gi, "_");
 }
 
-function getPlayerPath(username) {
-    return path.join(playersDir, `${getSafeUsername(username)}.json`);
+function getPlayerPath(userId) {
+    return path.join(playersDir, `${userId}.json`);
 }
 
 function getCreationPath(userId) {
@@ -84,7 +84,7 @@ if (creationState.step === "class") {
     };
 
     fs.writeFileSync(
-        getPlayerPath(creationState.discordUsername),
+        getPlayerPath(creationState.discordUserId),
         JSON.stringify(player, null, 2)
     );
 

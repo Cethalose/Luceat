@@ -52,7 +52,7 @@ if (message.content === "!join") {
         return;
     }
 
-    const campaign = joinCampaign(message.author.username);
+    const campaign = joinCampaign(message.author.id);
 
     await message.reply(`${characterData.player.character.name} has joined ${campaign.name}.`);
     return;

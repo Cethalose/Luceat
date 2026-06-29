@@ -16,11 +16,11 @@ function getPartyText() {
         return `Campaign: ${campaign.name}\n\nNo party members yet.`;
     }
 
-    const members = campaign.party.map(username => {
-        const playerPath = path.join(playersDir, `${username}.json`);
+    const members = campaign.party.map(userId => {
+        const playerPath = path.join(playersDir, `${userId}.json`);
 
         if (!fs.existsSync(playerPath)) {
-            return `- ${username} (character file missing)`;
+            return `- ${userId} (character file missing)`;
         }
 
         const player = JSON.parse(fs.readFileSync(playerPath, "utf8"));
