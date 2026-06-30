@@ -1,0 +1,17 @@
+{
+  "watch": [
+    "ai",
+    "bot",
+    "game",
+    "prompts",
+    "utils",
+    "config",
+    "index.js"
+  ],
+  "ignore": [
+    "data",
+    ".git",
+    "node_modules"
+  ],
+  "ext": "js,json,txt"
+}

@@ -27,7 +27,11 @@ function addItemToInventory(player, playerPath, itemName) {
         player.character.inventory = [];
     }
 
-    player.character.inventory.push(itemName);
+    if (player.character.inventory.includes(itemName)) {
+    return `${player.character.name} already has ${itemName}.`;
+}
+
+player.character.inventory.push(itemName);
 
     savePlayer(player, playerPath);
 

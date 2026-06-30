@@ -1,4 +1,6 @@
 node_modules/
 .env
 data/session.json
+# Runtime game data
 data/players/
+data/campaigns/

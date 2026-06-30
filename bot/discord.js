@@ -9,6 +9,8 @@ const { getInventoryText, addItemToInventory } = require("../game/inventoryManag
 const serverConfig = require("../config/server.json");
 const { getPartyText } = require("../game/partyManager");
 const { joinCampaign } = require("../game/campaignManager");
+const { processPlayerAction } = require("../game/actionProcessor");
+const { log, timeStart, timeEnd } = require("../utils/logger");
 
 const client = new Client({
     intents: [
@@ -24,6 +26,7 @@ client.once("ready", () => {
 
 client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
+    log("Discord", `${message.author.username}: ${message.content}`);
 
     if (message.content === "!create") {
         const reply = startCharacterCreation(message.author);
@@ -89,7 +92,20 @@ if (message.content === "!join") {
 
     const characterData = loadCharacterForUser(message.author);
     const character = characterData?.player;
+    const actionResult = processPlayerAction(playerMessage, characterData);
+    console.log("Sending prompt to AI...");
+    timeStart("AI Response");
+
+    log("AI", "Sending prompt to Ollama...");
     const aiResponse = await askAI(playerMessage, character);
+    log("AI", "Response received.");
+
+    timeEnd("AI Response");
+    console.log("AI response received.");
+    
+    if (actionResult) {
+    addSessionEvent(actionResult);
+}
 
     if (character) {
         addSessionEvent(`${character.character.name}: ${playerMessage}`);
