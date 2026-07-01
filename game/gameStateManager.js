@@ -63,7 +63,49 @@ function removeVisibleObject(objectName) {
     };
 }
 
+function hasItem(characterData, itemName) {
+    if (!characterData || !characterData.player) {
+        return false;
+    }
+
+    const inventory = characterData.player.character.inventory || [];
+
+    return inventory.includes(itemName);
+}
+
+function unlockSceneObject(objectName, requiredItem, characterData) {
+    if (!hasItem(characterData, requiredItem)) {
+        return {
+            success: false,
+            message: `${characterData.player.character.name} needs ${requiredItem} to unlock ${objectName}.`
+        };
+    }
+
+    const scene = getCurrentScene();
+
+    if (!scene) {
+        return {
+            success: false,
+            message: "No current scene found."
+        };
+    }
+
+    if (!scene.notes) {
+        scene.notes = [];
+    }
+
+    scene.notes.push(`${objectName} was unlocked using ${requiredItem}.`);
+    saveScene(scene);
+
+    return {
+        success: true,
+        message: `${characterData.player.character.name} unlocked ${objectName} using ${requiredItem}.`
+    };
+}
+
 module.exports = {
     giveItem,
-    removeVisibleObject
+    removeVisibleObject,
+    hasItem,
+    unlockSceneObject
 };
